@@ -1,7 +1,8 @@
 from random import randint
 
+# create board
 border = [" " for x in range(1,10)]
-
+# print board
 def print_border():
     print(border[0] + " | " + border[1] + " | " + border[2])
     print("--+---+--")
@@ -9,6 +10,7 @@ def print_border():
     print("--+---+--")
     print(border[6] + " | " + border[7] + " | " + border[8])
 
+# add user value
 def AddValueX(val,pos):
     while not CheckPosition(pos):
         print("position already allocated")
@@ -17,9 +19,11 @@ def AddValueX(val,pos):
 
     border[pos] = val
 
+# check position is available or not
 def CheckPosition(pos):
     return border[pos] == " "
 
+# computer move
 def compMove():
     possibleMoves = [x for x in range(len(border)) if border[x] == " " and border[x] != "X"]
     move = 0
@@ -48,6 +52,7 @@ def compMove():
             move = selectRandom(edge)
             return move
 
+# check winner
 def isWinner(b,l):
     return ((b[0] == l and b[1] == l and b[2] == l)
             or (b[3] == l and b[4] == l and b[5] == l)
@@ -58,16 +63,19 @@ def isWinner(b,l):
             or (b[0] == l and b[4] == l and b[8] == l)
             or (b[2] == l and b[4] == l and b[6] == l))
 
+# return random move from a list
 def selectRandom(list):
     import random
     index = random.randrange(0,len(list))
     return list[index]
 
+# place computer move
 def AddValueO(val,pos):
     # while not CheckPosition(pos):
     #     pos = randint(0,8)
     border[pos] = val
 
+# validate the upcoming move
 def ValidatePosition(pos):
     while not pos.isdigit():
         pos = input("Invalid Number! Enter valid number:")
@@ -77,6 +85,7 @@ def ValidatePosition(pos):
         pos = int(pos)-1
     return pos
 
+# check board is full or not
 def isFull():
     count = 0
     for h in border:
@@ -84,7 +93,7 @@ def isFull():
             count += 1
     return count == 0
 
-
+# starting function
 def main():
     print("tik tac toe")
     print_border()
